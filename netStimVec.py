@@ -1,4 +1,3 @@
-
 ##################################################################################################
 ## NetStim start vector. Each element corresponds with the start time corresponding NetStim object
 ## NetStim will produce 20 event burst with interval of 1000 ms
