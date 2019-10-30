@@ -25,7 +25,9 @@ netParams.cellParams['INRule' ] = INcellRule
 netParams.cellParams['WDRRule'] = WDRcellRule
 
 ###################################################################################################################################
+#
 #   Synaptic Mechanisms
+#
 ###################################################################################################################################
 netParams.defaultThreshold = -30
 
@@ -36,6 +38,15 @@ netParams.synMechParams['NK23'] = {'mod': 'NK1_DynSyn', 'tau_rise': 200, 'tau_de
 netParams.synMechParams['GABA'] = {'mod': 'GABAa_DynSyn', 'tau_rise': 0.1, 'tau_decay': 20, 'e': -70}
 netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'tau_decay': 10}
 
+###################################################################################################################################
+#
+#   Weight Parameters
+#
+###################################################################################################################################
+
+AB = 1.0
+AD = 1.0
+C  = 1.0
 
 ###################################################################################################################################
 #
@@ -47,7 +58,7 @@ netParams.connParams['AMPA_NS->SG0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
-    'weight': 0.00097067,
+    'weight': 0.00097067 * AB,
     'sec': 'dend',
     'delay': starts[0:15], 
     'loc': 0.51,
@@ -58,7 +69,7 @@ netParams.connParams['AMPA_NS->WDR0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 0.0016,
+    'weight': 0.0016 * AB,
     'sec': 'dend',
     'delay': starts[15:30], 
     'loc': 0.50,
@@ -69,7 +80,7 @@ netParams.connParams['NMDA_NS->WDR0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 6.6667e-5,
+    'weight': 6.6667e-5 * AB,
     'sec': 'dend',
     'delay': starts[30:45], 
     'loc': 0.50,
@@ -83,7 +94,7 @@ netParams.connParams['AMPA_NS->SG1'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
-    'weight': 0,
+    'weight': 0 * AB,
     'sec': 'dend',
     'delay': starts[45:60], 
     'loc': 0.51,
@@ -94,7 +105,7 @@ netParams.connParams['AMPA_NS->WDR1'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 0.0016,
+    'weight': 0.0016 * AD,
     'sec': 'dend',
     'delay': starts[60:75], 
     'loc': 0.50,
@@ -105,7 +116,7 @@ netParams.connParams['NMDA_NS->WDR1'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 6.6667e-5,
+    'weight': 6.6667e-5 * AD,
     'sec': 'dend',
     'delay': starts[75:90], 
     'loc': 0.50,
@@ -119,7 +130,7 @@ netParams.connParams['AMPA_NS->SG2'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
-    'weight': 0.0013333,
+    'weight': 0.0013333 * AB,
     'sec': 'dend',
     'delay': starts[90:105], 
     'loc': 0.51,
@@ -130,7 +141,7 @@ netParams.connParams['AMPA_NS->IN0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
-    'weight': 0.008,
+    'weight': 0.008 * C,
     'sec': 'dend',
     'delay': starts[105:135], 
     'loc': 0.5,
@@ -141,7 +152,7 @@ netParams.connParams['NMDA_NS->IN0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
-    'weight': 0.004,
+    'weight': 0.004 * C,
     'sec': 'dend',
     'delay': starts[135:165], 
     'loc': 0.5,
@@ -152,7 +163,7 @@ netParams.connParams['NK1_NS->IN0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
-    'weight': 6.6667e-7,
+    'weight': 6.6667e-7 * C,
     'sec': 'dend',
     'delay': starts[165:195], 
     'loc': 0.5,
@@ -163,7 +174,7 @@ netParams.connParams['NK1_NS->WDR0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 4.5e-7,
+    'weight': 4.5e-7 * C,
     'sec': 'dend',
     'delay': starts[195:225], 
     'loc': 0.5,
