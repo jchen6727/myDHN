@@ -31,12 +31,12 @@ netParams.cellParams['WDRRule'] = WDRcellRule
 ###################################################################################################################################
 netParams.defaultThreshold = -30
 
-netParams.synMechParams['AMPA'] = {'mod': 'AMPA_DynSyn', 'tau_rise': 0.1, 'tau_decay': 5}
-netParams.synMechParams['NMDA'] = {'mod': 'NMDA_DynSyn', 'tau_rise': 2, 'tau_decay': 100}
-netParams.synMechParams['NK13'] = {'mod': 'NK1_DynSyn', 'tau_rise': 100, 'tau_decay': 3000}
-netParams.synMechParams['NK23'] = {'mod': 'NK1_DynSyn', 'tau_rise': 200, 'tau_decay': 3000}
-netParams.synMechParams['GABA'] = {'mod': 'GABAa_DynSyn', 'tau_rise': 0.1, 'tau_decay': 20, 'e': -70}
-netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'tau_decay': 10}
+netParams.synMechParams['AMPA'] = {'mod': 'AMPA_DynSyn'   , 'tau_rise': 0.1, 'tau_decay': 5              }
+netParams.synMechParams['NMDA'] = {'mod': 'NMDA_DynSyn'   , 'tau_rise': 2  , 'tau_decay': 100            }
+netParams.synMechParams['NK13'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 100, 'tau_decay': 3000           }
+netParams.synMechParams['NK23'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 200, 'tau_decay': 3000           }
+netParams.synMechParams['GABA'] = {'mod': 'GABAa_DynSyn'  , 'tau_rise': 0.1, 'tau_decay': 20   , 'e': -70}
+netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'tau_decay': 10             }
 
 ###################################################################################################################################
 #
@@ -246,8 +246,7 @@ netParams.connParams['GABA_IN->WDR'] = {
 ###########################################################################################################################
 # For the purpose of recreating original, however, all following connParams has no effect on simulation as is (weight is 0)
 ###########################################################################################################################
-
-netParams.connParams['GABA_SG->IN'] = {
+netParams.connParams['GABA_SG1->IN'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  
@@ -258,7 +257,7 @@ netParams.connParams['GABA_SG->IN'] = {
     'synMech': 'GABA',
     'connList': [ [1, 0] ]}
 
-netParams.connParams['GABA_SG->WDR'] = {
+netParams.connParams['GABA_SG1->WDR'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  

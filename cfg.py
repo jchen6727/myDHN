@@ -9,7 +9,7 @@ simConfig = specs.SimConfig()   # object of class SimConfig to store the simulat
 simConfig.hParams['celsius'] = 36
 simConfig.hParams['v_init'] = -65
 simConfig.dt = 0.0125
-simConfig.duration = 22100
+simConfig.duration = 1#22100
 # Simulation parameters
 
 simConfig.checkErrors=False # True # 
