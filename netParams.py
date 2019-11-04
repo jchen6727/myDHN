@@ -12,13 +12,13 @@ netParams = specs.NetParams()
 ###################################################################################################################################
 
 netParams.popParams['NS' ] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
-netParams.popParams['SG' ] = {'cellType': 'SG', 'numCells': 2 }
-netParams.popParams['IN' ] = {'cellType': 'IN', 'numCells': 1 }
-netParams.popParams['WDR'] = {'cellType': 'WDR', 'numCells': 1 }
+netParams.popParams['SG' ] = {'cellType': 'SG' , 'numCells': 2 , 'cellModel': '_SG' } # this is the inhibitory interneuron     (IN )
+netParams.popParams['IN' ] = {'cellType': 'IN' , 'numCells': 1 , 'cellModel': '_IN' } # this is the excitatory interneuron     (EX )
+netParams.popParams['WDR'] = {'cellType': 'WDR', 'numCells': 1 , 'cellModel': '_WDR'} # this is the wide dynamic range neuron  (WDR)
 
-SGcellRule  = netParams.importCellParams(label='SGrule' , conds={'cellType': 'SG' }, fileName='SG.tem' , cellName='SG')
-INcellRule  = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' }, fileName='IN.tem' , cellName='IN')
-WDRcellRule = netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR'}, fileName='WDR.tem', cellName='WDR')
+SGcellRule  = netParams.importCellParams(label='SGrule' , conds={'cellType': 'SG'  ,'cellModel': '_SG' }, fileName='SG.tem' , cellName='SG')
+INcellRule  = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN'  ,'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
+WDRcellRule = netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR' ,'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
 
 netParams.cellParams['SGRule' ] = SGcellRule
 netParams.cellParams['INRule' ] = INcellRule
@@ -188,7 +188,7 @@ netParams.connParams['NK1_NS->WDR0'] = {
 ###################################################################################################################################
 
 
-netParams.connParams['GABA_SG->IN'] = {
+netParams.connParams['GABA_SG->IN0'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  
@@ -232,10 +232,21 @@ netParams.connParams['GLY_SG->WDR'] = {
     'synMech': 'GLY',
     'connList': [ [0, 0] ]}
 
-netParams.connParams['GABA_IN->WDR'] = {
+netParams.connParams['GABA_SG->IN1'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  
+    'weight': 0.00532,
+    'sec': 'dend',
+    'delay': 1, 
+    'loc': 0.5,
+    'synMech': 'GABA',
+    'connList': [ [0, 0] ]}
+
+netParams.connParams['GABA_SG->WDR'] = {
+    'nonLinear': True,
+    'preConds': {'popLabel': 'SG'}, 
+    'postConds': {'popLabel': 'WDR'},  
     'weight': 0.00532,
     'sec': 'dend',
     'delay': 1, 
@@ -260,7 +271,7 @@ netParams.connParams['GABA_SG1->IN'] = {
 netParams.connParams['GABA_SG1->WDR'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
-    'postConds': {'popLabel': 'IN'},  
+    'postConds': {'popLabel': 'WDR'},  
     'weight': 0,
     'sec': 'dend',
     'delay': 1, 
