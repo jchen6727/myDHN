@@ -232,17 +232,6 @@ netParams.connParams['GLY_SG->WDR'] = {
     'synMech': 'GLY',
     'connList': [ [0, 0] ]}
 
-netParams.connParams['GABA_SG->IN1'] = {
-    'nonLinear': True,
-    'preConds': {'popLabel': 'SG'}, 
-    'postConds': {'popLabel': 'IN'},  
-    'weight': 0.00532,
-    'sec': 'dend',
-    'delay': 1, 
-    'loc': 0.5,
-    'synMech': 'GABA',
-    'connList': [ [0, 0] ]}
-
 netParams.connParams['GABA_SG->WDR'] = {
     'nonLinear': True,
     'preConds': {'popLabel': 'SG'}, 
