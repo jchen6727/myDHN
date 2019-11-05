@@ -55,7 +55,7 @@ C  = 1.0
 ###################################################################################################################################
 
 netParams.connParams['AMPA_NS->SG0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
     'weight': 0.00097067 * AB,
@@ -66,7 +66,7 @@ netParams.connParams['AMPA_NS->SG0'] = {
     'connList': [ [0, 0] for x in range(15) ] }
 
 netParams.connParams['AMPA_NS->WDR0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.0016 * AB,
@@ -77,7 +77,7 @@ netParams.connParams['AMPA_NS->WDR0'] = {
     'connList': [ [0, 0] for x in range(15) ] }
 
 netParams.connParams['NMDA_NS->WDR0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 6.6667e-5 * AB,
@@ -91,7 +91,7 @@ netParams.connParams['NMDA_NS->WDR0'] = {
 # For the purpose of recreating original, however, AMPA_NS->SG has no effect on simulation as is (weight is 0)
 ##############################################################################################################
 netParams.connParams['AMPA_NS->SG1'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
     'weight': 0 * AB,
@@ -102,7 +102,7 @@ netParams.connParams['AMPA_NS->SG1'] = {
     'connList': [ [0, 0] for x in range(15) ] }
 
 netParams.connParams['AMPA_NS->WDR1'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.0016 * AD,
@@ -113,7 +113,7 @@ netParams.connParams['AMPA_NS->WDR1'] = {
     'connList': [ [0, 0] for x in range(15) ] }
 
 netParams.connParams['NMDA_NS->WDR1'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 6.6667e-5 * AD,
@@ -127,7 +127,7 @@ netParams.connParams['NMDA_NS->WDR1'] = {
 # For the purpose of recreating original, however, AMPA_NS->SG has no effect on simulation as is (delay is 2e9)
 ###############################################################################################################
 netParams.connParams['AMPA_NS->SG2'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
     'weight': 0.0013333 * AB,
@@ -138,7 +138,7 @@ netParams.connParams['AMPA_NS->SG2'] = {
     'connList': [ [0, 1] for x in range(15) ] }
 
 netParams.connParams['AMPA_NS->IN0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
     'weight': 0.008 * C,
@@ -149,7 +149,7 @@ netParams.connParams['AMPA_NS->IN0'] = {
     'connList': [ [0, 0] for x in range(30) ] }
 
 netParams.connParams['NMDA_NS->IN0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
     'weight': 0.004 * C,
@@ -160,7 +160,7 @@ netParams.connParams['NMDA_NS->IN0'] = {
     'connList': [ [0, 0] for x in range(30) ] }
 
 netParams.connParams['NK1_NS->IN0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'IN'},  
     'weight': 6.6667e-7 * C,
@@ -171,7 +171,7 @@ netParams.connParams['NK1_NS->IN0'] = {
     'connList': [ [0, 0] for x in range(30) ] }
 
 netParams.connParams['NK1_NS->WDR0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 4.5e-7 * C,
@@ -189,7 +189,7 @@ netParams.connParams['NK1_NS->WDR0'] = {
 
 
 netParams.connParams['GABA_SG->IN0'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  
     'weight': 0.00532,
@@ -200,7 +200,7 @@ netParams.connParams['GABA_SG->IN0'] = {
     'connList': [ [0, 0] ]}
 
 netParams.connParams['AMPA_IN->WDR'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'IN'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 1.2e-5,
@@ -211,7 +211,7 @@ netParams.connParams['AMPA_IN->WDR'] = {
     'connList': [ [0, 0] for x in range(30) ]}
 
 netParams.connParams['NMDA_IN->WDR'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'IN'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 9.6e-6,
@@ -222,7 +222,7 @@ netParams.connParams['NMDA_IN->WDR'] = {
     'connList': [ [0, 0] for x in range(30) ]}
 
 netParams.connParams['GLY_SG->WDR'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.00532,
@@ -233,7 +233,7 @@ netParams.connParams['GLY_SG->WDR'] = {
     'connList': [ [0, 0] ]}
 
 netParams.connParams['GABA_SG->WDR'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.00532,
@@ -247,7 +247,7 @@ netParams.connParams['GABA_SG->WDR'] = {
 # For the purpose of recreating original, however, all following connParams has no effect on simulation as is (weight is 0)
 ###########################################################################################################################
 netParams.connParams['GABA_SG1->IN'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'IN'},  
     'weight': 0,
@@ -258,7 +258,7 @@ netParams.connParams['GABA_SG1->IN'] = {
     'connList': [ [1, 0] ]}
 
 netParams.connParams['GABA_SG1->WDR'] = {
-    'nonLinear': True,
+    'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'SG'}, 
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0,
