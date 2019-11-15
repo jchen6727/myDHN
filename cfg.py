@@ -9,7 +9,7 @@ simConfig = specs.SimConfig()   # object of class SimConfig to store the simulat
 simConfig.hParams['celsius'] = 36
 simConfig.hParams['v_init'] = -65
 simConfig.dt = 0.0125
-simConfig.duration = 1#22100
+simConfig.duration = 21000
 # Simulation parameters
 
 simConfig.checkErrors=False # True # 
@@ -30,4 +30,5 @@ simConfig.saveFolder = "data"
 simConfig.saveFileStep = 1000 # step size in ms to save data to disk
 simConfig.savePickle = True # Whether or not to write spikes etc. to a .mat file
 
-simConfig.analysis['plotTraces'] = {'include': ['SG', 'IN', 'WDR'], 'timeRange': [0, simConfig.duration], 'oneFigPer': 'trace', 'overlay': True, 'showFig' : False, 'saveFig':'./images/plotTraces.png'} # plot recorded traces for this list of cells
+simConfig.analysis['plotTraces'] = {'include': ['SG', 'IN', 'WDR'], 'oneFigPer': 'trace', 'overlay': True, 'showFig' : False, 'saveFig': True} # plot recorded traces for this list of cells
+simConfig.analysis['plotRaster'] = {'include': ['SG', 'IN', 'WDR'], 'orderInverse': False, 'showFig' : False, 'saveFig': True} 
