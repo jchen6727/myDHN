@@ -1,8 +1,11 @@
 from netpyne import specs
-from netpyne import sim
 
-from netStimVec import starts #import NetStim start times from file netStimVec.py
+from netStimVec import ABdelay, ADdelay, Cdelay #import NetStim start times from file netStimVec.py
 
+try:
+    from __main__ import cfg
+except:
+    from cfg import cfg
 netParams = specs.NetParams()
 
 ###################################################################################################################################
@@ -19,6 +22,12 @@ netParams.popParams['WDR'] = {'cellType': 'WDR', 'numCells': 1 , 'cellModel': '_
 SGcellRule  = netParams.importCellParams(label='SGrule' , conds={'cellType': 'SG'  ,'cellModel': '_SG' }, fileName='SG.tem' , cellName='SG')
 INcellRule  = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN'  ,'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
 WDRcellRule = netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR' ,'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
+
+for na in [SGcellRule['secs'][sec]['ions']['na'] for sec in SGcellRule['secs']]:na['e'] =   na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
+
+for na in [INcellRule['secs'][sec]['ions']['na'] for sec in INcellRule['secs']]:na['e'] =   na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
+
+for na in [WDRcellRule['secs'][sec]['ions']['na'] for sec in WDRcellRule['secs']]:na['e'] = na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
 
 netParams.cellParams['SGRule' ] = SGcellRule
 netParams.cellParams['INRule' ] = INcellRule
@@ -60,7 +69,7 @@ netParams.connParams['AMPA_NS->SG0'] = {
     'postConds': {'popLabel': 'SG'},  
     'weight': 0.00097067 * AB,
     'sec': 'dend',
-    'delay': starts[0:15], 
+    'delay': ABdelay, 
     'loc': 0.51,
     'synMech': 'AMPA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -71,7 +80,7 @@ netParams.connParams['AMPA_NS->WDR0'] = {
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.0016 * AB,
     'sec': 'dend',
-    'delay': starts[15:30], 
+    'delay': ABdelay, 
     'loc': 0.50,
     'synMech': 'AMPA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -82,7 +91,7 @@ netParams.connParams['NMDA_NS->WDR0'] = {
     'postConds': {'popLabel': 'WDR'},  
     'weight': 6.6667e-5 * AB,
     'sec': 'dend',
-    'delay': starts[30:45], 
+    'delay': ABdelay, 
     'loc': 0.50,
     'synMech': 'NMDA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -94,9 +103,9 @@ netParams.connParams['AMPA_NS->SG1'] = {
     'oneSynPerNetcon': True,
     'preConds': {'popLabel': 'NS'}, 
     'postConds': {'popLabel': 'SG'},  
-    'weight': 0 * AB,
+    'weight': 0 * AD,#stimulation vector times makes it look like it is travelling along the AD afferents
     'sec': 'dend',
-    'delay': starts[45:60], 
+    'delay': ADdelay, 
     'loc': 0.51,
     'synMech': 'AMPA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -107,7 +116,7 @@ netParams.connParams['AMPA_NS->WDR1'] = {
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.0016 * AD,
     'sec': 'dend',
-    'delay': starts[60:75], 
+    'delay': ADdelay, 
     'loc': 0.50,
     'synMech': 'AMPA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -118,7 +127,7 @@ netParams.connParams['NMDA_NS->WDR1'] = {
     'postConds': {'popLabel': 'WDR'},  
     'weight': 6.6667e-5 * AD,
     'sec': 'dend',
-    'delay': starts[75:90], 
+    'delay': ADdelay, 
     'loc': 0.50,
     'synMech': 'NMDA',
     'connList': [ [0, 0] for x in range(15) ] }
@@ -132,7 +141,7 @@ netParams.connParams['AMPA_NS->SG2'] = {
     'postConds': {'popLabel': 'SG'},  
     'weight': 0.0013333 * AB,
     'sec': 'dend',
-    'delay': starts[90:105], 
+    'delay': [ 2e9 ] * 15, 
     'loc': 0.51,
     'synMech': 'AMPA',
     'connList': [ [0, 1] for x in range(15) ] }
@@ -143,7 +152,7 @@ netParams.connParams['AMPA_NS->IN0'] = {
     'postConds': {'popLabel': 'IN'},  
     'weight': 0.008 * C,
     'sec': 'dend',
-    'delay': starts[105:135], 
+    'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'AMPA',
     'connList': [ [0, 0] for x in range(30) ] }
@@ -154,7 +163,7 @@ netParams.connParams['NMDA_NS->IN0'] = {
     'postConds': {'popLabel': 'IN'},  
     'weight': 0.004 * C,
     'sec': 'dend',
-    'delay': starts[135:165], 
+    'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NMDA',
     'connList': [ [0, 0] for x in range(30) ] }
@@ -165,7 +174,7 @@ netParams.connParams['NK1_NS->IN0'] = {
     'postConds': {'popLabel': 'IN'},  
     'weight': 6.6667e-7 * C,
     'sec': 'dend',
-    'delay': starts[165:195], 
+    'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NK13',
     'connList': [ [0, 0] for x in range(30) ] }
@@ -176,7 +185,7 @@ netParams.connParams['NK1_NS->WDR0'] = {
     'postConds': {'popLabel': 'WDR'},  
     'weight': 4.5e-7 * C,
     'sec': 'dend',
-    'delay': starts[195:225], 
+    'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NK23',
     'connList': [ [0, 0] for x in range(30) ] }
