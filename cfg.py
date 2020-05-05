@@ -9,8 +9,6 @@ cfg = specs.SimConfig()   # object of class SimConfig to store the simulation co
 #------------------------------------------------------------------------------
 # NA CHANNEL PARAMETERS
 #------------------------------------------------------------------------------
-cfg.perc = 0.0
-cfg.erev = 40
 
 cfg.hParams['celsius'] = 36
 cfg.hParams['v_init'] = -65

@@ -3,9 +3,6 @@ from netpyne.batch import Batch
 
 params = specs.ODict()
 
-params['perc'] = [ 30, 60, 90] 
-params['erev'] = [ 40 ]
-
 b = Batch(params = params, cfgFile = 'cfg.py', netParamsFile = 'netParams.py')
 
 b.batchLabel = 'DHN'
