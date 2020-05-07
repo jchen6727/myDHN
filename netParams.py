@@ -14,23 +14,20 @@ netParams = specs.NetParams()
 #
 ###################################################################################################################################
 
-netParams.popParams['NS' ] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
-netParams.popParams['SG' ] = {'cellType': 'SG' , 'numCells': 2 , 'cellModel': '_SG' } # this is the inhibitory interneuron     (IN )
-netParams.popParams['IN' ] = {'cellType': 'IN' , 'numCells': 1 , 'cellModel': '_IN' } # this is the excitatory interneuron     (EX )
-netParams.popParams['WDR'] = {'cellType': 'WDR', 'numCells': 1 , 'cellModel': '_WDR'} # this is the wide dynamic range neuron  (WDR)
+netParams.popParams['ABSTIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+netParams.popParams['ADSTIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+netParams.popParams['CSTIM' ] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+netParams.popParams['STIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+netParams.popParams['IN' ]  = {'cellType': 'IN' , 'numCells': 2, 'cellModel': '_IN' } # this is the inhibitory interneuron     (IN )
+netParams.popParams['EX' ]  = {'cellType': 'EX' , 'numCells': 1, 'cellModel': '_EX' } # this is the excitatory interneuron     (EX )
+netParams.popParams['WDR']  = {'cellType': 'WDR', 'numCells': 1, 'cellModel': '_WDR'} # this is the wide dynamic range neuron  (WDR)
 
-SGcellRule  = netParams.importCellParams(label='SGrule' , conds={'cellType': 'SG'  ,'cellModel': '_SG' }, fileName='SG.tem' , cellName='SG')
-INcellRule  = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN'  ,'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
-WDRcellRule = netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR' ,'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
+INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
+EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='EX.tem' , cellName='EX')
+WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
 
-for na in [SGcellRule['secs'][sec]['ions']['na'] for sec in SGcellRule['secs']]:na['e'] =   na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
-
-for na in [INcellRule['secs'][sec]['ions']['na'] for sec in INcellRule['secs']]:na['e'] =   na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
-
-for na in [WDRcellRule['secs'][sec]['ions']['na'] for sec in WDRcellRule['secs']]:na['e'] = na['e'] * (1 - cfg.perc) + cfg.perc * cfg.erev
-
-netParams.cellParams['SGRule' ] = SGcellRule
 netParams.cellParams['INRule' ] = INcellRule
+netParams.cellParams['EXRule' ] = EXcellRule
 netParams.cellParams['WDRRule'] = WDRcellRule
 
 ###################################################################################################################################
@@ -40,12 +37,12 @@ netParams.cellParams['WDRRule'] = WDRcellRule
 ###################################################################################################################################
 netParams.defaultThreshold = -30
 
-netParams.synMechParams['AMPA'] = {'mod': 'AMPA_DynSyn'   , 'tau_rise': 0.1, 'tau_decay': 5              }
-netParams.synMechParams['NMDA'] = {'mod': 'NMDA_DynSyn'   , 'tau_rise': 2  , 'tau_decay': 100            }
-netParams.synMechParams['NK13'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 100, 'tau_decay': 3000           }
-netParams.synMechParams['NK23'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 200, 'tau_decay': 3000           }
-netParams.synMechParams['GABA'] = {'mod': 'GABAa_DynSyn'  , 'tau_rise': 0.1, 'tau_decay': 20   , 'e': -70}
-netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'tau_decay': 10             }
+netParams.synMechParams['AMPA'] = {'mod': 'AMPA_DynSyn'   , 'tau_rise': 0.1, 'tau_decay': 5             }
+netParams.synMechParams['NMDA'] = {'mod': 'NMDA_DynSyn'   , 'tau_rise': 2  , 'tau_decay': 100           }
+netParams.synMechParams['NK13'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 100, 'tau_decay': 3000          }
+netParams.synMechParams['NK23'] = {'mod': 'NK1_DynSyn'    , 'tau_rise': 200, 'tau_decay': 3000          }
+netParams.synMechParams['GABA'] = {'mod': 'GABAa_DynSyn'  , 'tau_rise': 0.1, 'tau_decay': 20  , 'e': -70}
+netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'tau_decay': 10            }
 
 ###################################################################################################################################
 #
@@ -53,9 +50,9 @@ netParams.synMechParams['GLY']  = {'mod': 'Glycine_DynSyn', 'tau_rise': 0.1, 'ta
 #
 ###################################################################################################################################
 
-AB = 1.0
-AD = 1.0
-C  = 1.0
+AB= 1.0
+AD= 1.0
+C = 1.0
 
 ###################################################################################################################################
 #
@@ -63,132 +60,134 @@ C  = 1.0
 #
 ###################################################################################################################################
 
-netParams.connParams['AMPA_NS->SG0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'SG'},  
+
+netParams.connParams['AMPA_NS->IN0'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'IN'},
     'weight': 0.00097067 * AB,
     'sec': 'dend',
     'delay': ABdelay, 
     'loc': 0.51,
     'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(15) ] }
+    'connList': [[0, 0] for x in range(15)]}
 
 netParams.connParams['AMPA_NS->WDR0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'WDR'},  
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'WDR'},
     'weight': 0.0016 * AB,
     'sec': 'dend',
-    'delay': ABdelay, 
+    'delay': ABdelay,
     'loc': 0.50,
     'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(15) ] }
+    'connList': [[0, 0] for x in range(15)]}
 
 netParams.connParams['NMDA_NS->WDR0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'WDR'},  
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'WDR'},
     'weight': 6.6667e-5 * AB,
     'sec': 'dend',
-    'delay': ABdelay, 
+    'delay': ABdelay,
     'loc': 0.50,
     'synMech': 'NMDA',
-    'connList': [ [0, 0] for x in range(15) ] }
+    'connList': [[0, 0] for x in range(15)]}
 
-##############################################################################################################
-# For the purpose of recreating original, however, AMPA_NS->SG has no effect on simulation as is (weight is 0)
-##############################################################################################################
-netParams.connParams['AMPA_NS->SG1'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'SG'},  
-    'weight': 0 * AD,#stimulation vector times makes it look like it is travelling along the AD afferents
-    'sec': 'dend',
-    'delay': ADdelay, 
-    'loc': 0.51,
-    'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(15) ] }
-
-netParams.connParams['AMPA_NS->WDR1'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'WDR'},  
-    'weight': 0.0016 * AD,
-    'sec': 'dend',
-    'delay': ADdelay, 
-    'loc': 0.50,
-    'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(15) ] }
-
-netParams.connParams['NMDA_NS->WDR1'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'WDR'},  
-    'weight': 6.6667e-5 * AD,
-    'sec': 'dend',
-    'delay': ADdelay, 
-    'loc': 0.50,
-    'synMech': 'NMDA',
-    'connList': [ [0, 0] for x in range(15) ] }
-
-###############################################################################################################
-# For the purpose of recreating original, however, AMPA_NS->SG has no effect on simulation as is (delay is 2e9)
-###############################################################################################################
-netParams.connParams['AMPA_NS->SG2'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'SG'},  
+netParams.connParams['AMPA_NS->IN2'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'IN'},
     'weight': 0.0013333 * AB,
     'sec': 'dend',
-    'delay': [ 2e9 ] * 15, 
+    'delay': [ 2e9 ] * 15,
     'loc': 0.51,
     'synMech': 'AMPA',
-    'connList': [ [0, 1] for x in range(15) ] }
+    'connList': [[0, 1] for x in range(15)]}
 
-netParams.connParams['AMPA_NS->IN0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'IN'},  
+##############################################################################################################
+# For the purpose of recreating original, however, AMPA_NS->IN has no effect on simulation as is (weight is 0)
+##############################################################################################################
+netParams.connParams['AMPA_NS->IN1'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'IN'},
+    'weight': 0 * AD,#stimulation vector times makes it look like it is travelling along the AD afferents
+    'sec': 'dend',
+    'delay': ADdelay,
+    'loc': 0.51,
+    'synMech': 'AMPA',
+    'connList': [[0, 0] for x in range(15)]}
+
+netParams.connParams['AMPA_NS->WDR1'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'WDR'},
+    'weight': 0.0016 * AD,
+    'sec': 'dend',
+    'delay': ADdelay,
+    'loc': 0.50,
+    'synMech': 'AMPA',
+    'connList': [[0, 0] for x in range(15)]}
+
+netParams.connParams['NMDA_NS->WDR1'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'WDR'},
+    'weight': 6.6667e-5 * AD,
+    'sec': 'dend',
+    'delay': ADdelay,
+    'loc': 0.50,
+    'synMech': 'NMDA',
+    'connList': [[0, 0] for x in range(15)]}
+
+###############################################################################################################
+# For the purpose of recreating original, however, AMPA_NS->IN has no effect on simulation as is (delay is 2e9)
+###############################################################################################################
+
+netParams.connParams['AMPA_NS->EX0'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'EX'},
     'weight': 0.008 * C,
     'sec': 'dend',
     'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(30) ] }
+    'connList': [[0, 0] for x in range(30)]}
 
-netParams.connParams['NMDA_NS->IN0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'IN'},  
+netParams.connParams['NMDA_NS->EX0'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'EX'},
     'weight': 0.004 * C,
     'sec': 'dend',
     'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NMDA',
-    'connList': [ [0, 0] for x in range(30) ] }
+    'connList': [[0, 0] for x in range(30)]}
 
-netParams.connParams['NK1_NS->IN0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
-    'postConds': {'popLabel': 'IN'},  
+netParams.connParams['NK1_NS->EX0'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
+    'postConds': {'popLabel': 'EX'},
     'weight': 6.6667e-7 * C,
     'sec': 'dend',
     'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NK13',
-    'connList': [ [0, 0] for x in range(30) ] }
+    'connList': [[0, 0] for x in range(30)]}
 
 netParams.connParams['NK1_NS->WDR0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'NS'}, 
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'STIM'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 4.5e-7 * C,
     'sec': 'dend',
     'delay': Cdelay, 
     'loc': 0.5,
     'synMech': 'NK23',
-    'connList': [ [0, 0] for x in range(30) ] }
+    'connList': [[0, 0] for x in range(30)]}
 
 ###################################################################################################################################
 #
@@ -197,83 +196,82 @@ netParams.connParams['NK1_NS->WDR0'] = {
 ###################################################################################################################################
 
 
-netParams.connParams['GABA_SG->IN0'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'SG'}, 
-    'postConds': {'popLabel': 'IN'},  
-    'weight': 0.00532,
+netParams.connParams['GABA_IN->EX0'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'IN'},
+    'postConds': {'popLabel': 'EX'},
+    'weight': 0.00532 * ,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'GABA',
-    'connList': [ [0, 0] ]}
+    'connList': [[0, 0]]}
 
-netParams.connParams['AMPA_IN->WDR'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'IN'}, 
+netParams.connParams['AMPA_EX->WDR'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'EX'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 1.2e-5,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'AMPA',
-    'connList': [ [0, 0] for x in range(30) ]}
+    'connList': [[0, 0] for x in range(30)]}
 
-netParams.connParams['NMDA_IN->WDR'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'IN'}, 
+netParams.connParams['NMDA_EX->WDR'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'EX'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 9.6e-6,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'NMDA',
-    'connList': [ [0, 0] for x in range(30) ]}
+    'connList': [[0, 0] for x in range(30)]}
 
-netParams.connParams['GLY_SG->WDR'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'SG'}, 
+netParams.connParams['GLY_IN->WDR'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'IN'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.00532,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'GLY',
-    'connList': [ [0, 0] ]}
+    'connList': [[0, 0]]}
 
-netParams.connParams['GABA_SG->WDR'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'SG'}, 
+netParams.connParams['GABA_IN->WDR'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'IN'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0.00532,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'GABA',
-    'connList': [ [0, 0] ]}
+    'connList': [[0, 0]]}
 
 ###########################################################################################################################
 # For the purpose of recreating original, however, all following connParams has no effect on simulation as is (weight is 0)
 ###########################################################################################################################
-netParams.connParams['GABA_SG1->IN'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'SG'}, 
-    'postConds': {'popLabel': 'IN'},  
+netParams.connParams['GABA_IN1->EX'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'IN'},
+    'postConds': {'popLabel': 'EX'},
     'weight': 0,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'GABA',
-    'connList': [ [1, 0] ]}
+    'connList': [[1, 0]]}
 
-netParams.connParams['GABA_SG1->WDR'] = {
-    'oneSynPerNetcon': True,
-    'preConds': {'popLabel': 'SG'}, 
+netParams.connParams['GABA_IN1->WDR'] = {
+    'oneSynPerNetcon': False,
+    'preConds': {'popLabel': 'IN'},
     'postConds': {'popLabel': 'WDR'},  
     'weight': 0,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'GABA',
-    'connList': [ [1, 0], [1, 0] ]}
-
+    'connList': [[1, 0], [1, 0]]}

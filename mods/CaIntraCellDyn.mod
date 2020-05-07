@@ -73,7 +73,7 @@ ASSIGNED {
 }
 	
 BREAKPOINT {
-	SOLVE state METHOD euler
+	SOLVE state METHOD cnexp
 }
 
 DERIVATIVE state { 
