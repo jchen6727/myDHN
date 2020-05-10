@@ -42,7 +42,7 @@ insert pas
 {gnar_B_Na = 0 ena = 60 g_pas = 0 e_pas = -70 gkbar_KDRI = 0 ek = -84}
 
 access dend
-{nseg=50 diam=1.4 L = 1371}
+{nseg=50 diam=1.4 L = 1371}d
 insert SS
 insert B_DR
 insert KDR

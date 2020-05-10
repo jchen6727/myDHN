@@ -17,14 +17,20 @@ netParams = specs.NetParams()
 netParams.popParams['ABSTIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
 netParams.popParams['ADSTIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
 netParams.popParams['CSTIM' ] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+
 netParams.popParams['STIM'] = {'cellModel': 'NetStim', 'interval': 1000, 'noise': 0, 'start': 0, 'number': 20, 'numCells': 1}
+
 netParams.popParams['IN' ]  = {'cellType': 'IN' , 'numCells': 2, 'cellModel': '_IN' } # this is the inhibitory interneuron     (IN )
 netParams.popParams['EX' ]  = {'cellType': 'EX' , 'numCells': 1, 'cellModel': '_EX' } # this is the excitatory interneuron     (EX )
 netParams.popParams['WDR']  = {'cellType': 'WDR', 'numCells': 1, 'cellModel': '_WDR'} # this is the wide dynamic range neuron  (WDR)
 
-INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
-EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='EX.tem' , cellName='EX')
-WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
+# INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
+# EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='EX.tem' , cellName='EX')
+# WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
+
+INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='cells.py', cellName='createIN')
+EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='cells.py', cellName='createEX')
+WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='cells.py', cellName='createWDR')
 
 netParams.cellParams['INRule' ] = INcellRule
 netParams.cellParams['EXRule' ] = EXcellRule
@@ -200,7 +206,7 @@ netParams.connParams['GABA_IN->EX0'] = {
     'oneSynPerNetcon': False,
     'preConds': {'popLabel': 'IN'},
     'postConds': {'popLabel': 'EX'},
-    'weight': 0.00532 * ,
+    'weight': 0.00532,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
@@ -211,23 +217,23 @@ netParams.connParams['AMPA_EX->WDR'] = {
     'oneSynPerNetcon': False,
     'preConds': {'popLabel': 'EX'},
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 1.2e-5,
+    'weight': 1.2e-5 * 30,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'AMPA',
-    'connList': [[0, 0] for x in range(30)]}
+    'connList': [[0, 0]]}
 
 netParams.connParams['NMDA_EX->WDR'] = {
     'oneSynPerNetcon': False,
     'preConds': {'popLabel': 'EX'},
     'postConds': {'popLabel': 'WDR'},  
-    'weight': 9.6e-6,
+    'weight': 9.6e-6 * 30,
     'sec': 'dend',
     'delay': 1, 
     'loc': 0.5,
     'synMech': 'NMDA',
-    'connList': [[0, 0] for x in range(30)]}
+    'connList': [[0, 0]]}
 
 netParams.connParams['GLY_IN->WDR'] = {
     'oneSynPerNetcon': False,

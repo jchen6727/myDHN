@@ -30,7 +30,7 @@ ASSIGNED {
 	celsius (degC)
 	v (mV)
 	ik (mA/cm2)
-	ek (mV): -84 mV
+:	ek (mV): -84 mV
 
 	gkbar (mho/cm2)
 	tadj (1)
