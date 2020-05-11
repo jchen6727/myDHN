@@ -118,7 +118,7 @@ netParams.connParams['AMPA_NS->IN1'] = {
     'oneSynPerNetcon': False,
     'preConds': {'popLabel': 'STIM'},
     'postConds': {'popLabel': 'IN'},
-    'weight': 0 * AD,#stimulation vector times makes it look like it is travelling along the AD afferents
+    'weight': 0 * AD, # AD afferent
     'sec': 'dend',
     'delay': ADdelay,
     'loc': 0.51,
