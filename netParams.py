@@ -2,7 +2,7 @@ from netpyne import specs
 
 from netStimVec import ABdelay, ADdelay, Cdelay #import NetStim start times from file netStimVec.py
 
-from cells import EXcellRule, INcellRule, WDRcellRule
+import cells
 
 try:
     from __main__ import cfg
@@ -31,13 +31,13 @@ netParams.popParams['WDR']  = {'cellType': 'WDR', 'numCells': 1, 'cellModel': '_
 # EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='cells.py', cellName='createEX')
 # WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='cells.py', cellName='createWDR')
 
-INcellRule['conds'] = {'cellType': 'IN' , 'cellModel': '_IN' }
-EXcellRule['conds'] = {'cellType': 'EX' , 'cellModel': '_EX' }
-WDRcellRule['conds']= {'cellType': 'WDR', 'cellModel': '_WDR'}
+cells.INcellRule['conds'] = {'cellType': 'IN' , 'cellModel': '_IN' }
+cells.EXcellRule['conds'] = {'cellType': 'EX' , 'cellModel': '_EX' }
+cells.WDRcellRule['conds']= {'cellType': 'WDR', 'cellModel': '_WDR'}
 
-netParams.cellParams['INRule' ] = INcellRule
-netParams.cellParams['EXRule' ] = EXcellRule
-netParams.cellParams['WDRRule'] = WDRcellRule
+netParams.cellParams['INRule' ] = cells.INcellRule
+netParams.cellParams['EXRule' ] = cells.EXcellRule
+netParams.cellParams['WDRRule'] = cells.WDRcellRule
 
 ###################################################################################################################################
 #
