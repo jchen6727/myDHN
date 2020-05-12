@@ -121,13 +121,10 @@ class genrn():
                  mechs = {},
                  ions  = {},
                  cons  = ()):
-        """
-
-        :rtype: object
-        """
         self.tags = {'all': []}
         # secs -> pointer
         self.secs = {}
+        self.gesecs = self.tags['all']
 #        self.useions = re.compile("USEION ([A-Za-z0-9]+)")
         self.init_cell(secs, ions)
         self.initialize_mechs('all', mechs, ions)

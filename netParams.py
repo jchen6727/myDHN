@@ -2,10 +2,13 @@ from netpyne import specs
 
 from netStimVec import ABdelay, ADdelay, Cdelay #import NetStim start times from file netStimVec.py
 
+from cells import EXcellRule, INcellRule, WDRcellRule
+
 try:
     from __main__ import cfg
 except:
     from cfg import cfg
+
 netParams = specs.NetParams()
 
 ###################################################################################################################################
@@ -24,13 +27,13 @@ netParams.popParams['IN' ]  = {'cellType': 'IN' , 'numCells': 2, 'cellModel': '_
 netParams.popParams['EX' ]  = {'cellType': 'EX' , 'numCells': 1, 'cellModel': '_EX' } # this is the excitatory interneuron     (EX )
 netParams.popParams['WDR']  = {'cellType': 'WDR', 'numCells': 1, 'cellModel': '_WDR'} # this is the wide dynamic range neuron  (WDR)
 
-# INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='IN.tem' , cellName='IN')
-# EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='EX.tem' , cellName='EX')
-# WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='WDR.tem', cellName='WDR')
+# INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='cells.py', cellName='createIN')
+# EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='cells.py', cellName='createEX')
+# WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='cells.py', cellName='createWDR')
 
-INcellRule = netParams.importCellParams(label='INrule' , conds={'cellType': 'IN' , 'cellModel': '_IN' }, fileName='cells.py', cellName='createIN')
-EXcellRule = netParams.importCellParams(label='EXrule' , conds={'cellType': 'EX' , 'cellModel': '_EX' }, fileName='cells.py', cellName='createEX')
-WDRcellRule= netParams.importCellParams(label='WDRrule', conds={'cellType': 'WDR', 'cellModel': '_WDR'}, fileName='cells.py', cellName='createWDR')
+INcellRule['conds'] = {'cellType': 'IN' , 'cellModel': '_IN' }
+EXcellRule['conds'] = {'cellType': 'EX' , 'cellModel': '_EX' }
+WDRcellRule['conds']= {'cellType': 'WDR', 'cellModel': '_WDR'}
 
 netParams.cellParams['INRule' ] = INcellRule
 netParams.cellParams['EXRule' ] = EXcellRule
